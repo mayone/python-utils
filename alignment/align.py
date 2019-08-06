@@ -11,18 +11,26 @@ def is_wide(ch):
 	----------
 	ch : character
 	    The character to be checked.
+
+	Examples
+	--------
+	>>> is_wide('鄭')
+	True
+
+	>>> is_wide('a')
+	False
 	"""
 	res = unicodedata.east_asian_width(ch)
 	if res == 'A':
 		# Ambiguous
-		if _platform.startswith('linux'):
+		if _platform.startswith("linux"):
 			# Linux
 			return False
-		elif _platform.startswith('win') or \
-			_platform.startswith('cygwin'):
+		elif _platform.startswith("win") or \
+			_platform.startswith("cygwin"):
 			# Windows
 			return True
-		elif _platform.startswith('darwin'):
+		elif _platform.startswith("darwin"):
 			# Mac OS X
 			return False
 		else:
@@ -31,10 +39,10 @@ def is_wide(ch):
 	elif res == 'F':
 		# Fullwidth
 		return True
-	elif res == "H":
+	elif res == 'H':
 		# Halfwidth
 		return False
-	elif res == "N":
+	elif res == 'N':
 		# Neutral (Not East Asian)
 		return False
 	elif res == "Na":
@@ -54,6 +62,17 @@ def get_width(string):
 	----------
 	string : str
 	    Target string.
+
+	Examples
+	--------
+	>>> get_width("你好")
+	4
+
+	>>> get_width("Hello")
+	5
+
+	>>> get_width("")
+	0
 	"""
 	width = 0
 	#combining_char = u'[?([\u0300-\u036F]'
@@ -89,6 +108,13 @@ def align(string, dir='l', length=12):
 	    'l' means left, 'r' means right.
 	length : int
 	    Align length.
+
+	Examples
+	>>> align("Hello", dir='r', length=8)
+	'   Hello'
+
+	>>> align("你好", dir='r', length=8)
+	'    你好'
 	"""
 	diff = length - get_width(string)
 
