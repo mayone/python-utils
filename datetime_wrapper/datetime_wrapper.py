@@ -19,6 +19,10 @@ def get_utcnow_str(fmt=iso8061comp_fmt):
 	now_str = datetime.now(timezone.utc).strftime(fmt)
 	return now_str
 
+def dt_to_str(dt, fmt=iso8061comp_fmt):
+	dt_str = dt.strftime(fmt)
+	return dt_str
+
 def datetime_from_str(iso8061comp_str):
 	dt = datetime.strptime(iso8061comp_str, iso8061comp_fmt).replace(tzinfo=timezone.utc)
 	return dt
