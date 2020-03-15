@@ -3,5 +3,5 @@
 
 ## Testing
 ```sh
-python3 -m doctest -v align.py
+python3 -m doctest -v alignment.py
 ```
