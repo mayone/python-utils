@@ -1,16 +1,25 @@
-# Virtual Environment Setup
+# Virtual Environment
 
-## Setup Virtual Environment
+## Run using Makefile
+```sh
+make run
+```
+
+---
+
+## Run by activating venv
+
+### Setup Virtual Environment (will activate venv)
 ```sh
 source venv_setup.sh
 ```
 
-## Execute
+### Execute
 ```sh
 python test.py
 ```
 
-## Exit Virtual Environment
+### Exit Virtual Environment
 ```sh
 deactivate
 ```
