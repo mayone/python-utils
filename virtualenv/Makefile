@@ -1,3 +1,4 @@
+SHELL := /bin/bash
 VENV := env
 PYTHON := ${VENV}/bin/python
 
@@ -14,4 +15,7 @@ test:
 run: init
 	${PYTHON} test.py
 
-.PHONY: init prepare_venv test run
+clean:
+	rm -rf ${VENV}
+
+.PHONY: init prepare_venv test run clean
