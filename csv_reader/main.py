@@ -25,7 +25,7 @@ if __name__ == "__main__":
         [name, height_cm, weight] = row
         height_m = float(height_cm) / 100
         weight = float(weight)
-        bmi = weight / (height_m * height_m)
+        bmi = (lambda h, w: w / (h * h))(height_m, weight)
         print(f"{name}\t{bmi}")
 
         if bmi < overweight_bmi:
