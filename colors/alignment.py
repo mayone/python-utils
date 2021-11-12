@@ -6,6 +6,21 @@ import re
 
 
 def remove_ansi_escape(string):
+    """Remove ANSI escape code.
+
+    Parameters
+    ----------
+    string : string
+        The string to be handled.
+
+    Examples
+    --------
+    >>> remove_ansi_escape('\033[94mHello\033[0m')
+    'Hello'
+
+    >>> remove_ansi_escape('\033[4mHi\033[0m')
+    'Hi'
+    """
     # ansi_escape = re.compile(r'''
     #         \x1B  # ESC
     #         (?:   # 7-bit C1 Fe (except CSI)
@@ -19,6 +34,7 @@ def remove_ansi_escape(string):
     #     ''', re.VERBOSE)
     ansi_escape = re.compile(r'(?:\x1B[@-_]|[\x80-\x9F])[0-?]*[ -/]*[@-~]')
     return ansi_escape.sub('', string)
+
 
 def is_wide(ch):
     """Check is the character wide or not.
