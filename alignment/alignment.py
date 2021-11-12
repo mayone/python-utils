@@ -2,8 +2,23 @@
 
 from sys import platform as _platform
 import unicodedata
-#import re
+import re
 
+
+def remove_ansi_escape(string):
+    # ansi_escape = re.compile(r'''
+    #         \x1B  # ESC
+    #         (?:   # 7-bit C1 Fe (except CSI)
+    #             [@-Z\\-_]
+    #         |     # or [ for CSI, followed by a control sequence
+    #             \[
+    #             [0-?]*  # Parameter bytes
+    #             [ -/]*  # Intermediate bytes
+    #             [@-~]   # Final byte
+    #         )
+    #     ''', re.VERBOSE)
+    ansi_escape = re.compile(r'(?:\x1B[@-_]|[\x80-\x9F])[0-?]*[ -/]*[@-~]')
+    return ansi_escape.sub('', string)
 
 def is_wide(ch):
     """Check is the character wide or not.
@@ -79,6 +94,8 @@ def get_width(string):
 
     if not string:
         return 0
+
+    string = remove_ansi_escape(string)
 
     width = 0
     #combining_char = u'[?([\u0300-\u036F]'
