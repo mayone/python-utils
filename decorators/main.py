@@ -15,14 +15,19 @@ def countdown(from_number):
         print(from_number)
         countdown(from_number - 1)
 
+
 @timer
 @debug
 @slow_down(rate=0.5)
 def greeting(name):
     return f"Hello {name}"
 
-if __name__ == "__main__":
+
+def main():
     print(countdown.__name__)
     countdown(3)
     greeting("World")
-    
+
+
+if __name__ == "__main__":
+    main()
