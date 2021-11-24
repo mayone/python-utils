@@ -1,8 +1,18 @@
 from enum import IntEnum, auto
 
 
-# ANSI escape code - SGR (Select Graphic Rendition)
+# ANSI escape code
 
+
+def SGR(codes=""):
+    """ANSI control sequence - Select Graphic Rendition."""
+    # Escape
+    # ESC = "\33"
+    ESC = "\x1b"
+    # CSI (Control Sequence Introducer)
+    CSI = f"{ESC}["
+
+    return f"{CSI}{codes}m"
 
 # FG Color code
 
@@ -92,8 +102,7 @@ def colored(fmt, fg=None, bg=None, style=None):
     # form string
     props = ';'.join([str(x) for x in props])
     if props:
-        # return f"\33[{props}m{fmt}\33[0m"
-        return f"\x1b[{props}m{fmt}\x1b[0m"
+        return f"{SGR(props)}{fmt}{SGR()}"
     else:
         return fmt
 
