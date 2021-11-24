@@ -1,22 +1,28 @@
 # Python-Utilities
 
-#### virtualenv
-- Script to setup virtual environment
+#### alignment
+- Align string with whitespace (supports Chinese characters)
 
-#### doctest_example
-- Demonstrate usage of doctest
+#### colors
+- Colored text
 
-#### singleton
-- Singleton base class
+#### csv_reader
+- Example of read/write csv file
 
 #### datetime_wrapper
 - Common usage of datetime
 
-#### alignment
-- Align string with whitespace (supports Chinese characters)
+#### decorators
+- Examples of decorators
+
+#### doctest_example
+- Demonstrate usage of doctest
 
 #### rest_client_server
 - Example of RESTful client and server
 
-#### csv_reader
-- Example of read/write csv file
+#### singleton
+- Singleton base class
+
+#### virtualenv
+- Script to setup virtual environment

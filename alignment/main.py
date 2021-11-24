@@ -6,7 +6,7 @@ class Colors:
     UNDERLINE = '\033[4m'
     REVERSE = '\033[7m'
     BR_BLUE = '\033[94m'
-    
+
 
 def align_demo():
     print("Alignment demo (left align)")
