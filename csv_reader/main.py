@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 
 import csv
+import config
 
 
 def main():
-    in_file = open("input.csv", "r")
-    fit_out_file = open("fit.csv", "w")
-    fat_out_file = open("fat.csv", "w")
+    in_file = open(config.INPUT_PATH, "r")
+    fit_out_file = open(config.OUTPUT_FIT_PATH, "w")
+    fat_out_file = open(config.OUTPUT_FAT_PATH, "w")
 
     fit_writer = csv.writer(fit_out_file)
     fat_writer = csv.writer(fat_out_file)
