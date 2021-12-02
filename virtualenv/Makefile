@@ -20,7 +20,7 @@ test:
 	# py.test tests
 
 run: init
-	${PYTHON} test.py
+	${PYTHON} main.py
 
 clean:
 	rm -rf ${VENV}

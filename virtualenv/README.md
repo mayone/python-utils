@@ -16,7 +16,7 @@ source venv_setup.sh
 
 ### Execute
 ```sh
-python test.py
+python main.py
 ```
 
 ### Exit Virtual Environment
