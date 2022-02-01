@@ -67,7 +67,7 @@ CYAN='\033[0;36m'
 WHITE='\033[0;37m'
 
 info() {
-  printf "\r  [ ${BLUE}..${NC} ] $1\n"
+  printf "\r${CLEAR}  [ ${BLUE}..${NC} ] $1\n"
 }
 
 ok() {
@@ -88,7 +88,6 @@ check_cmd() {
 }
 
 check_exist() {
-  # command ls "$1" >/dev/null 2>&1
   test -e "$1" >/dev/null 2>&1
 }
 
