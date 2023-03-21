@@ -43,9 +43,11 @@ venv_activate() {
     err "Unable to find virtual environment"
   fi
 
+  pip install --upgrade pip
+
   # Install packages by requirements file
   if check_exist "${REQ}"; then
-    pip3 install -r ${REQ}
+    pip install -r ${REQ}
     ok "Packages installed"
   fi
 }
