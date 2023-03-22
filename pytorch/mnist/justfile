@@ -1,0 +1,21 @@
+alias s := setup
+alias t := train
+alias r := run
+
+VENV := "env"
+PYTHON := VENV / "bin" / "python"
+
+_default:
+    @just --list
+
+setup:
+    @source venv_setup.sh
+
+train *ARGS: setup
+    {{PYTHON}} main.py {{ARGS}}
+
+run *ARGS: setup
+    {{PYTHON}} app.py {{ARGS}}
+
+clean:
+    rm -rf {{VENV}}
