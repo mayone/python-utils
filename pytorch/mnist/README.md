@@ -1,11 +1,16 @@
 # MNIST
 
-## Train Model
+## Install dependencies
 ```sh
-just t --save-model
+just deps
 ```
 
-## Predict
+## Train model
+```sh
+just t
+```
+
+## Run App to predict image
 ```sh
 just r --image images/6lackpink.png
 ```
