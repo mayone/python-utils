@@ -24,6 +24,16 @@ class API():
         }
         self.__session.headers.update(headers)
 
+    def get_external_ip(self):
+        req = "https://ipecho.net/plain"
+        try:
+            resp = requests.get(req)
+        except Exception as e:
+            print("API request error", e)
+            raise
+
+        return resp.text
+
     def GET(self, query):
         session = self.__session
         req = self.__base_url + query
@@ -46,7 +56,7 @@ class API():
 
         return payload
 
-    def POST(self, query, data):
+    def POST(self, query, data=None):
         session = self.__session
         req = self.__base_url + query
 
