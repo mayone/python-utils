@@ -6,4 +6,4 @@ def add(a, b):
     >>> add(-5, 3)
     -2
     """
-    return a+b
+    return a + b

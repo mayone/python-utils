@@ -5,7 +5,7 @@ import sys
 import inspect
 
 
-if not hasattr(sys.modules[__name__], '__file__'):
+if not hasattr(sys.modules[__name__], "__file__"):
     # Handle __file__ not defined
     __file__ = inspect.getfile(inspect.currentframe())
 

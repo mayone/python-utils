@@ -54,7 +54,7 @@ def main_pure():
     fit_writer = csv.writer(fit_out_file)
     fat_writer = csv.writer(fat_out_file)
 
-    lines = csv.reader(in_file, delimiter=',')
+    lines = csv.reader(in_file, delimiter=",")
 
     overweight_bmi = 25
 

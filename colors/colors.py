@@ -16,6 +16,7 @@ def SGR(codes=""):
 
     return f"{CSI}{codes}m"
 
+
 # FG Color code
 
 
@@ -41,6 +42,7 @@ class FGC(IntEnum):
     def describe(self):
         return self.name, self.value
 
+
 # BG Color code
 
 
@@ -62,6 +64,7 @@ class BGC(IntEnum):
     BR_MAGENTA = auto()
     BR_CYAN = auto()
     BR_WHITE = auto()
+
 
 # Style code
 
@@ -102,7 +105,7 @@ def colored(fmt, fg=None, bg=None, style=None):
         props.append(bg.value)
 
     # form string
-    props = ';'.join([str(x) for x in props])
+    props = ";".join([str(x) for x in props])
     if props:
         return f"{SGR(props)}{fmt}{SGR()}"
     else:

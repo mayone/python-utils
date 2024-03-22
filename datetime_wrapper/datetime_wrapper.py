@@ -30,7 +30,8 @@ def dt_to_str(dt, fmt=iso8061comp_fmt):
 
 def datetime_from_str(iso8061comp_str):
     dt = datetime.strptime(iso8061comp_str, iso8061comp_fmt).replace(
-        tzinfo=timezone.utc)
+        tzinfo=timezone.utc
+    )
     return dt
 
 
@@ -41,8 +42,7 @@ def utc_to_local(dt):
 
 
 def utc_shift_tz(dt, hours=8):
-    dt = dt.astimezone(timezone(offset=timedelta(hours=hours))
-                       ).replace(tzinfo=None)
+    dt = dt.astimezone(timezone(offset=timedelta(hours=hours))).replace(tzinfo=None)
     return dt
 
 

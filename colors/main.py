@@ -8,7 +8,7 @@ def showcase():
     cprint("FGC", fg=FGC.BR_RED, bg=BGC.WHITE, style=[Style.BOLD])
     output = ""
     for i, (cname, color) in enumerate([(c.name, c) for c in FGC]):
-        if (i % 8 == 7):
+        if i % 8 == 7:
             print(output)
             output = ""
         else:
@@ -18,7 +18,7 @@ def showcase():
     cprint("BGC", fg=FGC.WHITE, bg=BGC.RED, style=[Style.BOLD])
     output = ""
     for i, (cname, color) in enumerate([(c.name, c) for c in BGC]):
-        if (i % 8 == 7):
+        if i % 8 == 7:
             print(output)
             output = ""
         else:
@@ -27,7 +27,7 @@ def showcase():
 
     cprint("Style", bg=BGC.GRAY, style=[Style.BOLD, Style.ITALIC])
     output = ""
-    for (sname, style) in [(s.name, s) for s in Style]:
+    for sname, style in [(s.name, s) for s in Style]:
         # output += f"{colored(sname, style=[style]):>20}"
         output += f"{align(colored(sname, style=[style]), dir='r', length=12)}"
     print(output)

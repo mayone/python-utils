@@ -13,6 +13,7 @@ def timer(func):
         run_time = end_time - start_time
         print(f"Finished {func.__name__} in {run_time:.4} secs")
         return value
+
     return wrapper_timer
 
 
@@ -28,6 +29,7 @@ def debug(func):
         value = func(*args, **kwargs)
         print(f"{func.__name__!r} returned {value!r}")
         return value
+
     return wrapper_debug
 
 

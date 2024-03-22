@@ -4,11 +4,9 @@ import json
 import requests
 
 
-class API():
+class API:
     def __init__(self):
-        headers = {
-            "Accept": "application/json"
-        }
+        headers = {"Accept": "application/json"}
         self.__base_url = ""
         self.__jwt = None
         self.__session = requests.session()
@@ -19,9 +17,7 @@ class API():
 
     def set_jwt(self, jwt):
         self.__jwt = jwt
-        headers = {
-            "Authorization": f"Bearer {self.__jwt}"
-        }
+        headers = {"Authorization": f"Bearer {self.__jwt}"}
         self.__session.headers.update(headers)
 
     def get_external_ip(self):
@@ -65,8 +61,7 @@ class API():
                 resp = session.post(req, json=data)
             else:
                 resp = session.post(
-                    req, data=data,
-                    headers={"Content-Type": "application/json"}
+                    req, data=data, headers={"Content-Type": "application/json"}
                 )
         except Exception as e:
             print("API request error", e)

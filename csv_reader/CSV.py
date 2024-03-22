@@ -4,7 +4,7 @@ import csv
 from prettytable import PrettyTable
 
 
-class CSV():
+class CSV:
     def __init__(self, file_path, *args):
         self.lines = None
         self.__fp = None
@@ -31,7 +31,7 @@ class CSV():
         if not self.__fp or not self.__fp.readable():
             return
         self.__fp.seek(0)
-        lines = csv.reader(self.__fp, delimiter=',')
+        lines = csv.reader(self.__fp, delimiter=",")
         self.lines = [row for row in lines]
 
     def write(self, row):
