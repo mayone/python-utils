@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from sys import platform as _platform
-import unicodedata
 import re
+import unicodedata
+from sys import platform as _platform
 
 
 def remove_ansi_escape(string):

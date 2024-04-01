@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from decorators import (
-    timer,
     debug,
     slow_down,
+    timer,
 )
 
 

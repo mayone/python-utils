@@ -2,7 +2,6 @@
 
 from enum import IntEnum, auto
 
-
 # ANSI escape code
 
 

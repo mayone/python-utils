@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
+import inspect
 import os
 import sys
-import inspect
-
 
 if not hasattr(sys.modules[__name__], "__file__"):
     # Handle __file__ not defined

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import csv
+
 from prettytable import PrettyTable
 
 

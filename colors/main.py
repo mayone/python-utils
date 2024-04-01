@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-from colors import FGC, BGC, Style, colored, cprint
 from alignment import align
+from colors import BGC, FGC, Style, colored, cprint
 
 
 def showcase():

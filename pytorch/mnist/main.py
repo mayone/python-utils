@@ -1,11 +1,11 @@
 import argparse
+
 import torch
 import torch.optim as optim
-from torchvision import datasets, transforms
-from torch.optim.lr_scheduler import StepLR
-
 from model import Net
-from train import train, test
+from torch.optim.lr_scheduler import StepLR
+from torchvision import datasets, transforms
+from train import test, train
 
 
 def load_data(train_kwargs, test_kwargs):

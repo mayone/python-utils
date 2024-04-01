@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import time
-from datetime import datetime, timezone, timedelta
-
+from datetime import datetime, timedelta, timezone
 
 # ISO 8601 compact format
 iso8061comp_fmt = "%Y%m%dT%H%M%S.%fZ"

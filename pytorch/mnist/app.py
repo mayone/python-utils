@@ -1,12 +1,10 @@
-import os
 import argparse
-from PIL import Image
+import os
+
 import torch
-from torchvision import transforms
-
-
 from model import Net
-
+from PIL import Image
+from torchvision import transforms
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 default_img_path = os.path.join(dir_path, "images/6.png")
