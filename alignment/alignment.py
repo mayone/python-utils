@@ -103,6 +103,9 @@ def get_width(string):
     >>> get_width("Hello")
     5
 
+    >>> get_width("❤️")
+    1
+
     >>> get_width("")
     0
     """
@@ -113,13 +116,21 @@ def get_width(string):
     string = remove_ansi_escape(string)
 
     width = 0
-    # combining_char = u'[?([\u0300-\u036F]'
+    # combining_char = "[?([\u0300-\u036f]"
+    variation_selector = "[?([\ufe00-\ufe0f]"
+
     for i in range(len(string)):
         # Combining character
         # if re.match(combining_char, string[i]):
         if unicodedata.combining(string[i]):
             if i == 0:
-                # If combining character in beginning of the line alone
+                # If at beginning of the line alone
+                ch_width = 1
+            else:
+                ch_width = 0
+        elif re.match(variation_selector, string[i]):
+            if i == 0:
+                # If at beginning of the line alone
                 ch_width = 1
             else:
                 ch_width = 0
