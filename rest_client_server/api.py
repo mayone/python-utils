@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import requests
+from requests.exceptions import HTTPError
 
 
 class API:
@@ -23,8 +24,11 @@ class API:
         req = "https://ipecho.net/plain"
         try:
             resp = requests.get(req)
-        except Exception as e:
-            print("API request error", e)
+        except HTTPError as http_err:
+            print(f"API request HTTP error: {http_err}")
+            raise
+        except Exception as err:
+            print(f"API request other error: {err}")
             raise
 
         return resp.text
@@ -35,15 +39,18 @@ class API:
 
         try:
             resp = session.get(req)
-        except Exception as e:
-            print("API request error", e)
+        except HTTPError as http_err:
+            print(f"API request HTTP error: {http_err}")
+            raise
+        except Exception as err:
+            print(f"API request other error: {err}")
             raise
 
         status = resp.status_code
         try:
             payload = resp.json()
-        except Exception as e:
-            print("Payload parsing error", e)
+        except Exception as err:
+            print(f"Payload parsing error: {err}")
             raise Exception(status, resp)
 
         if not resp.ok:
@@ -62,15 +69,18 @@ class API:
                 resp = session.post(
                     req, data=data, headers={"Content-Type": "application/json"}
                 )
-        except Exception as e:
-            print("API request error", e)
+        except HTTPError as http_err:
+            print(f"API request HTTP error: {http_err}")
+            raise
+        except Exception as err:
+            print(f"API request other error: {err}")
             raise
 
         status = resp.status_code
         try:
             payload = resp.json()
-        except Exception as e:
-            print("Payload parsing error", e)
+        except Exception as err:
+            print(f"Payload parsing error: {err}")
             raise Exception(status, resp)
 
         if not resp.ok:
