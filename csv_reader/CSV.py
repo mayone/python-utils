@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import csv
+import json
 
 from prettytable import PrettyTable
 
@@ -11,7 +12,7 @@ class CSV:
         self.__fp = None
         self.__writer = None
         try:
-            self.__fp = open(file_path, *args)
+            self.__fp = open(file_path, *args, encoding="utf-8-sig")
             self.read()
         except Exception as e:
             print(f"Error: {e}")
@@ -41,6 +42,17 @@ class CSV:
         if not self.__writer:
             self.__writer = csv.writer(self.__fp)
         self.__writer.writerow(row)
+
+    def export_as_json(self, file_path):
+        data = []
+        header = self.lines[0]
+        for row in self.lines[1:]:
+            item = {}
+            for key in header:
+                item[key] = row[header.index(key)]
+            data.append(item)
+        with open(file_path, "w+") as fp:
+            json.dump(data, fp, ensure_ascii=False)
 
     def close(self):
         if self.__fp:
