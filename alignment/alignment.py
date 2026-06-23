@@ -5,8 +5,12 @@ import unicodedata
 from sys import platform as _platform
 
 _ANSI_ESCAPE_RE = re.compile(r"(?:\x1B[@-_]|[\x80-\x9F])[0-?]*[ -/]*[@-~]")
-_VARIATION_SELECTOR_RE = re.compile(r"[\ufe00-\ufe0f]")
 _ZERO_WIDTH_RE = re.compile(r"[\u200b-\u200d\u2060\ufeff]")
+_TEXT_VARIATION_SELECTOR_RE = re.compile(r"[\ufe00-\ufe0e]")  # VS1-VS15 (not VS16)
+_EMOJI_MODIFIER_RE = re.compile(r"[\U0001F3FB-\U0001F3FF]")  # Fitzpatrick skin tones
+
+_ZWJ = "\u200d"  # zero width joiner
+_VS16 = "\ufe0f"  # emoji-presentation variation selector
 
 
 def remove_ansi_escape(string: str) -> str:
@@ -74,13 +78,13 @@ def get_width(string: str) -> int:
     5
 
     >>> get_width("❤️")
-    1
+    2
 
     >>> get_width("✊")
     2
 
     >>> get_width("✊🏾")
-    4
+    2
 
     >>> get_width("🏳")
     1
@@ -89,7 +93,13 @@ def get_width(string: str) -> int:
     2
 
     >>> get_width("🏳️‍🌈")
-    3
+    2
+
+    >>> get_width("🇹🇼")
+    2
+
+    >>> get_width("👨‍👩‍👧‍👦")
+    2
 
     >>> get_width("")
     0
@@ -101,19 +111,41 @@ def get_width(string: str) -> int:
     string = remove_ansi_escape(string)
 
     width = 0
-    for i in range(len(string)):
-        if (
-            unicodedata.combining(string[i])
-            or _VARIATION_SELECTOR_RE.match(string[i])
-            or _ZERO_WIDTH_RE.match(string[i])
-        ):
-            ch_width = 1 if i == 0 else 0
-        elif is_wide(string[i]):
-            ch_width = 2
-        else:
-            ch_width = 1
+    base_width = 0  # width of the most recent base char, for VS16 emoji upgrade
+    join_next = False
+    for ch in string:
+        if join_next:
+            # joined into the previous glyph by a ZWJ; occupies no extra cell
+            join_next = False
+            base_width = 0
+            continue
 
-        width += ch_width
+        if ch == _ZWJ:
+            # the next character merges into one emoji glyph; skip it
+            join_next = True
+            base_width = 0
+            continue
+
+        if ch == _VS16:
+            # emoji-presentation selector: widen the preceding narrow base to 2 cells
+            if base_width == 1:
+                width += 1
+            base_width = 0
+            continue
+
+        if (
+            unicodedata.combining(ch)
+            or _ZERO_WIDTH_RE.match(ch)
+            or _TEXT_VARIATION_SELECTOR_RE.match(ch)
+            or _EMOJI_MODIFIER_RE.match(ch)
+        ):
+            # combining marks, zero-width chars, text variation selectors,
+            # and emoji skin-tone modifiers add no width
+            base_width = 0
+            continue
+
+        base_width = 2 if is_wide(ch) else 1
+        width += base_width
 
     return width
 
